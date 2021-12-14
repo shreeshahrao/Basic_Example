@@ -1,0 +1,64 @@
+import Foundation
+protocol Fly {
+    func fly()
+}
+protocol Swim {
+    func swim()
+}
+protocol Run {
+    func run()
+}
+protocol Bird {
+    var name: String { get }
+}
+
+class Eagle: Bird, Fly{
+    var name: String
+    
+    init(name: String)
+    {
+        self.name = name
+    }
+    
+    func fly() {
+        print("\(name) can fly in the air")
+    }
+}
+class Ostrich: Bird , Run{
+    
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+    func run() {
+        print("\(name) can Run Fast")
+    }
+}
+class Penguin: Bird , Swim {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+    func swim() {
+        print("\(name) can Swim in water")
+    }
+}
+class Duck: Bird , Swim , Fly {
+    var name: String
+    
+    func swim() {
+        <#code#>
+    }
+    
+    func fly() {
+        <#code#>
+    }
+    
+    
+}
+var eaggle = Eagle(name: "Eaggle")
+eaggle.fly()
+var ostrich = Ostrich(name: "Ostrich")
+ostrich.run()
+var penguin = Penguin(name: "Penguin")
+penguin.swim()
