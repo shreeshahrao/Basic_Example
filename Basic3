@@ -1,0 +1,45 @@
+
+enum PurchaseError: Error {
+    case InsufficentBalance(amount: Double)
+    case InsufficentStock(itemName: String)
+}
+struct Customer {
+    var name: String
+    var availableAmount: Double
+}
+
+struct Item {
+    var name: String
+    var price: Double
+    var remainingStock: Int
+}
+
+struct Store {
+    var name: String
+    
+    mutating func purchaseItem(item: inout Item , customer: inout Customer) throws {
+        if customer.availableAmount < item.price {
+            throw PurchaseError.InsufficentBalance(amount: item.price - customer.availableAmount)
+        }
+        if item.remainingStock <= 0 {
+            throw PurchaseError.InsufficentStock(itemName: item.name)
+        }
+        customer.availableAmount -= item.price
+        item.remainingStock -= 1
+        print("\(customer.name) has successfully purchased \(item.name)")
+        print("Customer Available Amount \(customer.availableAmount)")
+        print("Item Remaining Stock \(item.remainingStock)")
+        
+    }
+}
+var shreesha = Customer(name: "Shreesha", availableAmount: 1000.00)
+var iphone13 = Item(name: "Iphone13", price: 999.00, remainingStock: 0)
+var appStore = Store(name: "App Store")
+do {
+    try appStore.purchaseItem(item: &iphone13, customer: &shreesha)
+}catch PurchaseError.InsufficentStock(itemName: let name) {
+    print("\(name) is out of Stock")
+}
+catch PurchaseError.InsufficentBalance(amount: let amount) {
+    print("You should add \(amount) to by the item")
+}
