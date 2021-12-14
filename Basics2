@@ -1,0 +1,27 @@
+var names: Set = ["Shreesha" ,"Ashsish" , "Virat" , "Dhoni"]
+print(names)
+
+var footballClubs: [String: String] = ["England":"Chelsea","Spain":"Barcelona"]
+print(footballClubs["Spain"]!)
+
+var numbers: [Int] = [1, 2 , 3 ,4 , 5]
+var stringNumbers: [String] = []
+var count = numbers.count
+print(count)
+
+stringNumbers = numbers.map{ String($0) }
+print(stringNumbers)
+
+struct Car {
+    var name: String?
+    var gear: Int?
+    init(name: String) {
+        self.name = name
+    }
+    init(gear: Int) {
+        self.gear = gear
+    }
+}
+var bmw = Car(name: "BMW")
+bmw = Car(gear: 5)
+print()
