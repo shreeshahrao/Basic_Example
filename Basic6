@@ -1,0 +1,16 @@
+var greeting = {(name: String) in print("Hello \(name)")}
+greeting("Shreesha")
+
+func addition(num1: Int , num2: Int) -> Int {
+    return num1 + num2
+}
+func calculation(num1: Int , num2: Int, opreation: (Int , Int) -> Int) -> Int {
+    return opreation(num1,num2)
+}
+
+var addTwoNumbers = calculation(num1: 20, num2: 30, opreation: addition)
+print(addTwoNumbers)
+
+var multiplyTwoNumbers = calculation(num1: 15, num2: 30) { num1, num2 in
+    num1 * num2 }
+print(multiplyTwoNumbers)
