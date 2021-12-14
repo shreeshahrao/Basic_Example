@@ -1,0 +1,57 @@
+import Foundation
+enum Branch: String {
+    case cse = "Computer Science and Engineering"
+    case ec  = "Electronics and communication"
+    case ise = "Information Science and Engineering"
+}
+
+struct Student {
+    var name: String
+    var address: String
+    var phone: Int
+    var collegeName: String?
+    var branch: Branch?
+}
+struct College {
+    var name: String
+    var admitedList: [Student] = []
+    
+    mutating func admission(student: inout Student , branch: Branch) {
+       
+        student.collegeName = name
+        student.branch = branch
+        print("\(student.name) has been admited to \(student.collegeName)")
+        admitedList.append(student)
+    }
+    func showAdmitedStudents() {
+        print("Admited Students")
+        for student in admitedList {
+            print("\(student.name) has been admited to \(student.collegeName) Branch \(student.branch?.rawValue)")
+        }
+    }
+    mutating func removeStudent(student: Student) {
+        if let index = admitedList.firstIndex(where: { (studnt) in
+            studnt.name == student.name
+        }) {
+            admitedList.remove(at: index) }
+//        admitedList = admitedList.filter({ studnt in
+//            studnt.name != student.name
+//        })
+        print("\(student.name) has been removed from \(student.collegeName)")
+        
+        
+    }
+}
+var student1 = Student(name: "Shreesha", address: "Mangalore", phone: 8792799269)
+var canaraCollege = College(name: "Canara College")
+
+canaraCollege.admission(student: &student1, branch: Branch.cse)
+canaraCollege.showAdmitedStudents()
+var student2 = Student(name: "Adithya", address: "Bangalore", phone: 9478263120)
+canaraCollege.admission(student: &student2, branch: Branch.ec)
+canaraCollege.showAdmitedStudents()
+canaraCollege.removeStudent(student: student2)
+canaraCollege.showAdmitedStudents()
+//var nitteCollege = College(name: "Nitte College")
+//nitteCollege.admission(student: student2, branch: Branch.ec)
+//nitteCollege.showAdmitedStudents()
